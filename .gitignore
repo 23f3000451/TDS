@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.python-version
+
+# Virtual envs
+.venv/
+venv/
+
+# Env files (BUT we need .env for this task — see note below)
+# .env
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
