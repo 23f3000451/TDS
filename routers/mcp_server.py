@@ -24,4 +24,6 @@ def solve_challenge() -> str:
 
 
 # ASGI sub-app to mount in main.py
-mcp_app = mcp.http_app()
+# mcp_app = mcp.http_app()
+
+mcp_app = mcp.http_app(path="/")
