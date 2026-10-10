@@ -1,6 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from routers import problem_a, problem_b
+from routers import mcp_server          # <-- NEW
+
 
 app = FastAPI(title="My Unified API")
 
@@ -15,6 +17,9 @@ app.add_middleware(
 
 app.include_router(problem_a.router)
 app.include_router(problem_b.router)
+# --- NEW: mount MCP at /mcp ---
+
+app.mount("/mcp", mcp_server.mcp_app)
 
 
 @app.get("/")
