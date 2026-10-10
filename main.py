@@ -4,7 +4,7 @@ from routers import problem_a, problem_b
 from routers import mcp_server          # <-- NEW
 
 
-app = FastAPI(title="My Unified API")
+app = FastAPI(title="My Unified API", lifespan=mcp_server.mcp_app.lifespan)
 
 # CORS — required for the grader's browser page
 app.add_middleware(
@@ -13,19 +13,20 @@ app.add_middleware(
     allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
+    expose_headers=["mcp-session-id"],
 )
 
 app.include_router(problem_a.router)
 app.include_router(problem_b.router)
 # --- NEW: mount MCP at /mcp ---
 
-app.mount("/mcp", mcp_server.mcp_app)
+
 
 
 @app.get("/")
 def root():
     return {"message": "Unified API is running"}
-
+app.mount("/", mcp_server.mcp_app)
 # UV set up 
 # uv init # INITIALIZE PROJECT
 # uv add fastapi uvicorn json5
